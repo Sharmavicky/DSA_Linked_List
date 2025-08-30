@@ -27,6 +27,7 @@ class Node {
 public:
     int data;
     Node* next;
+    Node* random;
 
     Node(int value);
 };

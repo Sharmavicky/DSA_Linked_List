@@ -4,6 +4,7 @@
 Node::Node(int value) {
     data = value;
     next = NULL;
+    random = NULL;
 }
 
 // List constructor
