@@ -31,7 +31,8 @@ using namespace std;
 class Solution {
     public:
     Node* BruteForce(Node* head) {
-        int lastVisitedData = -101;
+        int lastVisitedData = INT32_MIN;
+        
         // dummy node
         Node* dummyNode = new Node(0);
 
@@ -63,6 +64,9 @@ class Solution {
             }
             oldTemp = oldTemp->next;
         }
+
+        // make last newNode as tail
+        newTemp->next = NULL;
 
         // return next node of our dummy node as our new head
         return dummyNode->next;
