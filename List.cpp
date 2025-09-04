@@ -1,4 +1,5 @@
 #include "List.h"
+#include <vector>
 
 // Node constructor
 Node::Node(int value) {
@@ -12,12 +13,24 @@ List::List() {
     Head = Tail = NULL;
 }
 
-Node* List::getHead() {
+Node* List::getHead() { // return the head of a linked list
     return Head;
 }
 
-Node* List::getTail() {
+Node* List::getTail() { // return the tail of a linked list
     return Tail;
+}
+
+int List::getLength(Node* head) {// return length of linkedlist
+    int length = 0;
+    Node* temp = head;
+
+    while (temp != NULL) {
+        length++;
+        temp = temp->next;
+    }
+
+    return length;
 }
 
 void List::insertNode(int value, int pos) {
@@ -117,4 +130,17 @@ void List::printLinkedList() {
         temp = temp->next;
     }
     cout << "NULL" << endl;
+}
+
+Node* List::createLink_ListfromArray(vector<int> nums) {
+    int length = nums.size();
+    Node* dummyNode = new Node(0);
+    Node* temp = dummyNode;
+
+    for (int n: nums) {
+        temp->next = new Node(n);
+        temp = temp->next;
+    }
+
+    return dummyNode->next;
 }
