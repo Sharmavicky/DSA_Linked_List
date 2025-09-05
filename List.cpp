@@ -86,6 +86,7 @@ void List::popFront() {
     }
     Node* temp = Head;
     Head = Head->next;
+    if (Head == NULL) Tail == NULL;
     delete temp;
 }
 
@@ -142,5 +143,9 @@ Node* List::createLink_ListfromArray(vector<int> nums) {
         temp = temp->next;
     }
 
-    return dummyNode->next;
+    Head = dummyNode->next;
+    Tail = temp;
+
+    delete dummyNode;
+    return Head;
 }
