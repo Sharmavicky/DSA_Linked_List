@@ -68,7 +68,6 @@ int main() {
 
     for (Node* temp = result; temp != NULL; temp = temp->next) {
         cout << temp->data << " -> ";
-
     }
     cout << "NULL";
 
