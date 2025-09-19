@@ -42,6 +42,7 @@ class Node {
     int data;
     Node* next;
     Node* prev;
+    Node* child;
 
     Node(int val);
 };
@@ -50,6 +51,7 @@ class DoublyList {
     private:
     Node* head;
     Node* tail;
+    Node* child;
 
     public:
     DoublyList();

@@ -41,12 +41,12 @@ using namespace std;
 // Node constructor
 Node::Node(int val) {
     data = val;
-    next = prev = NULL;
+    next = prev = child =  NULL;
 }
 
 // List constructor
 DoublyList::DoublyList() {
-    head = tail = NULL;
+    head = tail = child =  NULL;
 }
 
 // returns the head of list
