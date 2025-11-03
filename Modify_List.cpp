@@ -4,26 +4,29 @@ using namespace std;
 
 /*
     Class Name: Solution
-
-    Description:
-    This class provides two methods to remove nodes from a linked list 
+    --------------------
+    This class provides two approaches to remove specific nodes from a singly linked list
     whose values are present in a given array of integers.
 
-    Approaches Implemented:
-    1️⃣ BruteForce():
-        - Marks all nodes to be deleted by setting their values to -1.
-        - Then iteratively removes nodes with data = -1.
-        - Time Complexity: O(N * M), where N = size of list, M = size of nums.
-        - Space Complexity: O(1)
+    1. BruteForce Approach:
+        - For each value in the array, traverses the entire linked list and marks nodes
+          with matching values.
+        - Constructs a new linked list excluding the marked nodes.
+        - Time Complexity: O(N * M)
+        - Space Complexity: O(N)
+        - Simpler but inefficient for large inputs.
 
-    2️⃣ OptimalApproach():
-        - Uses an unordered_set for O(1) lookups of nodes to delete.
-        - Efficiently removes nodes while maintaining list integrity.
+    2. Optimal Approach:
+        - Utilizes an unordered_set for O(1) average lookup of nodes to delete.
+        - Modifies the existing linked list in place, skipping and deleting unwanted nodes.
         - Time Complexity: O(N + M)
         - Space Complexity: O(M)
+        - Efficient, memory-safe, and preferred for large-scale data.
 
-    Both methods ensure the final linked list is properly terminated 
-    and dynamically allocated nodes are safely deleted to prevent memory leaks.
+    Both methods ensure safe handling of edge cases such as:
+        - Empty linked list
+        - All nodes to be deleted
+        - No nodes to delete
 */
 
 class Solution {
@@ -38,28 +41,20 @@ class Solution {
             }
         }
 
-        // remove all node with data -1 before finding first positive node
-        while (head && head->data == -1) head = head->next;
+        // create a new linked list without -1 nodes
+        Node* dummy = new Node(0);
+        Node* curr = dummy;
 
-        Node* prev = head;
-        Node* curr = head ? head->next : NULL;
-        Node* toDelete = NULL;
-
-        while (curr) {
-            if (curr->data != -1) {
-                prev->next = curr;
-                prev = curr;
+        for (Node* temp = head; temp != NULL; temp = temp->next) {
+            if (temp->data != -1) {
+                curr->next = new Node(temp->data);
                 curr = curr->next;
-            } else {
-                toDelete = curr;
-                prev->next = curr->next;
-                curr = curr->next;
-                delete toDelete;
             }
         }
 
-        prev->next = NULL; // end the list
-        return head;
+        Node* newHead = dummy->next;
+        delete dummy; // free the dummy node
+        return newHead;
     }
 
     Node* OptimalApproach(vector<int>& nums, Node* head) {
